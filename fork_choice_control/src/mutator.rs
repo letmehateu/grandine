@@ -50,7 +50,7 @@ use prometheus_metrics::Metrics;
 use pubkey_cache::PubkeyCache;
 use ssz::SszHash as _;
 use std_ext::ArcExt as _;
-use tracing::instrument;
+use tracing::{instrument, Span};
 use typenum::Unsigned as _;
 use types::{
     combined::{BeaconState, ExecutionPayloadParams, SignedBeaconBlock},
@@ -2968,6 +2968,7 @@ where
             origin,
             processing_timings,
             metrics: self.metrics.clone(),
+            tracing_span: Span::current(),
         });
     }
 
